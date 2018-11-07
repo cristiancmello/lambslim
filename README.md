@@ -30,4 +30,6 @@ php -S 127.0.0.1:8000 bref.php
 
 ## Deployment
 
-TODO
+```
+./vendor/bin/bref deploy
+```
