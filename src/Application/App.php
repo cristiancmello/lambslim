@@ -3,8 +3,7 @@
 namespace LambSlim\Application;
 
 use Bref\Bridge\Slim\SlimAdapter;
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
+use function Composer\Autoload\includeFile;
 
 class App
 {
@@ -25,10 +24,9 @@ class App
     {
         $slim = new \Slim\App();
 
-        $slim->get('/dev', function (Request $request, Response $response) {
-            $response->getBody()->write('Hello, World!');
-            return $response;
-        });
+        Route::setHttpHandler($slim);
+
+        includeFile(__DIR__.'/../Routes/api.php');
 
         $app = new \Bref\Application;
         $app->httpHandler(new SlimAdapter($slim));
