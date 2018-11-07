@@ -1,0 +1,24 @@
+service: test
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+package:
+  exclude:
+    - '*'
+    - '**'
+  include:
+    - bref.php
+    - 'src/**'
+    - 'vendor/**'
+
+functions:
+  # By default we create one "main" function
+  main:
+    handler: handler.handle
+    timeout: 20 # Timeout in seconds, the default is 6 seconds
+    # The function will match all HTTP URLs
+    events:
+      - http: 'ANY /'
+      - http: 'ANY {proxy+}'
